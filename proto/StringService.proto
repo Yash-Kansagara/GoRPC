@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package stringservice;
+
+option go_package = "/gen/StringService;StringService";
+
+service StringService {
+    rpc isPalindrom (PalReq) returns (PalRes);
+}
+
+message PalReq {
+    string s = 1;
+}
+message PalRes {
+    bool isPal = 1;
+}

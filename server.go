@@ -3,7 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	pb "gorpc/gen/MathService"
+	"gorpc/gen/MathService"
+	"gorpc/gen/StringService"
 	"log"
 	"math"
 	"net"
@@ -12,10 +13,11 @@ import (
 )
 
 type server struct {
-	pb.UnimplementedMathServiceServer
+	MathService.UnimplementedMathServiceServer
+	StringService.UnimplementedStringServiceServer
 }
 
-func (s *server) Add(ctx context.Context, req *pb.AddRequest) (*pb.AddResponse, error) {
+func (s *server) Add(ctx context.Context, req *MathService.AddRequest) (*MathService.AddResponse, error) {
 
 	ans := make([]byte, (int)(math.Max(float64(len(req.Op1)), float64(len(req.Op2)))+1))
 	for i := range ans {
@@ -74,8 +76,25 @@ func (s *server) Add(ctx context.Context, req *pb.AddRequest) (*pb.AddResponse, 
 		a--
 	}
 
-	return &pb.AddResponse{
+	return &MathService.AddResponse{
 		Ans: string(ans[a+1:]),
+	}, nil
+}
+
+func (s *server) IsPalindrom(ctx context.Context, req *StringService.PalReq) (*StringService.PalRes, error) {
+
+	l, r := 0, len(req.S)-1
+	isPal := true
+	for l < r {
+		if req.S[l] != req.S[r] {
+			isPal = false
+			break
+		}
+		l++
+		r--
+	}
+	return &StringService.PalRes{
+		IsPal: isPal,
 	}, nil
 }
 
@@ -88,7 +107,9 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterMathServiceServer(grpcServer, &server{})
+	serverInst := &server{}
+	MathService.RegisterMathServiceServer(grpcServer, serverInst)
+	StringService.RegisterStringServiceServer(grpcServer, serverInst)
 
 	log.Printf("listening on :%d", port)
 	err = grpcServer.Serve(listner)
