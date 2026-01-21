@@ -4,8 +4,15 @@ package Maths;
 
 option go_package = "gen/MathService;MathService";
 
+import "google/api/annotations.proto";
+
 service MathService {
-    rpc Add (AddRequest) returns (AddResponse); 
+    rpc Add (AddRequest) returns (AddResponse){
+        option (google.api.http) = {
+            post : "/math/add"
+            body : "*"
+        };
+    };
 }
 
 message AddRequest{

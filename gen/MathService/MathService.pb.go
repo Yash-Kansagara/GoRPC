@@ -2,11 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v6.33.2
-// source: proto/MathService.proto
+// source: MathService.proto
 
 package MathService
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -31,7 +32,7 @@ type AddRequest struct {
 
 func (x *AddRequest) Reset() {
 	*x = AddRequest{}
-	mi := &file_proto_MathService_proto_msgTypes[0]
+	mi := &file_MathService_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +44,7 @@ func (x *AddRequest) String() string {
 func (*AddRequest) ProtoMessage() {}
 
 func (x *AddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_MathService_proto_msgTypes[0]
+	mi := &file_MathService_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +57,7 @@ func (x *AddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddRequest.ProtoReflect.Descriptor instead.
 func (*AddRequest) Descriptor() ([]byte, []int) {
-	return file_proto_MathService_proto_rawDescGZIP(), []int{0}
+	return file_MathService_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AddRequest) GetOp1() string {
@@ -82,7 +83,7 @@ type AddResponse struct {
 
 func (x *AddResponse) Reset() {
 	*x = AddResponse{}
-	mi := &file_proto_MathService_proto_msgTypes[1]
+	mi := &file_MathService_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -94,7 +95,7 @@ func (x *AddResponse) String() string {
 func (*AddResponse) ProtoMessage() {}
 
 func (x *AddResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_MathService_proto_msgTypes[1]
+	mi := &file_MathService_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +108,7 @@ func (x *AddResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddResponse.ProtoReflect.Descriptor instead.
 func (*AddResponse) Descriptor() ([]byte, []int) {
-	return file_proto_MathService_proto_rawDescGZIP(), []int{1}
+	return file_MathService_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AddResponse) GetAns() string {
@@ -117,38 +118,38 @@ func (x *AddResponse) GetAns() string {
 	return ""
 }
 
-var File_proto_MathService_proto protoreflect.FileDescriptor
+var File_MathService_proto protoreflect.FileDescriptor
 
-const file_proto_MathService_proto_rawDesc = "" +
+const file_MathService_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/MathService.proto\x12\x05Maths\"0\n" +
+	"\x11MathService.proto\x12\x05Maths\x1a\x1cgoogle/api/annotations.proto\"0\n" +
 	"\n" +
 	"AddRequest\x12\x10\n" +
 	"\x03op1\x18\x01 \x01(\tR\x03op1\x12\x10\n" +
 	"\x03op2\x18\x02 \x01(\tR\x03op2\"\x1f\n" +
 	"\vAddResponse\x12\x10\n" +
-	"\x03ans\x18\x01 \x01(\tR\x03ans2;\n" +
-	"\vMathService\x12,\n" +
-	"\x03Add\x12\x11.Maths.AddRequest\x1a\x12.Maths.AddResponseB\x1dZ\x1bgen/MathService;MathServiceb\x06proto3"
+	"\x03ans\x18\x01 \x01(\tR\x03ans2Q\n" +
+	"\vMathService\x12B\n" +
+	"\x03Add\x12\x11.Maths.AddRequest\x1a\x12.Maths.AddResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/math/addB\x1dZ\x1bgen/MathService;MathServiceb\x06proto3"
 
 var (
-	file_proto_MathService_proto_rawDescOnce sync.Once
-	file_proto_MathService_proto_rawDescData []byte
+	file_MathService_proto_rawDescOnce sync.Once
+	file_MathService_proto_rawDescData []byte
 )
 
-func file_proto_MathService_proto_rawDescGZIP() []byte {
-	file_proto_MathService_proto_rawDescOnce.Do(func() {
-		file_proto_MathService_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_MathService_proto_rawDesc), len(file_proto_MathService_proto_rawDesc)))
+func file_MathService_proto_rawDescGZIP() []byte {
+	file_MathService_proto_rawDescOnce.Do(func() {
+		file_MathService_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_MathService_proto_rawDesc), len(file_MathService_proto_rawDesc)))
 	})
-	return file_proto_MathService_proto_rawDescData
+	return file_MathService_proto_rawDescData
 }
 
-var file_proto_MathService_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_proto_MathService_proto_goTypes = []any{
+var file_MathService_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_MathService_proto_goTypes = []any{
 	(*AddRequest)(nil),  // 0: Maths.AddRequest
 	(*AddResponse)(nil), // 1: Maths.AddResponse
 }
-var file_proto_MathService_proto_depIdxs = []int32{
+var file_MathService_proto_depIdxs = []int32{
 	0, // 0: Maths.MathService.Add:input_type -> Maths.AddRequest
 	1, // 1: Maths.MathService.Add:output_type -> Maths.AddResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -158,26 +159,26 @@ var file_proto_MathService_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_MathService_proto_init() }
-func file_proto_MathService_proto_init() {
-	if File_proto_MathService_proto != nil {
+func init() { file_MathService_proto_init() }
+func file_MathService_proto_init() {
+	if File_MathService_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_MathService_proto_rawDesc), len(file_proto_MathService_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_MathService_proto_rawDesc), len(file_MathService_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_MathService_proto_goTypes,
-		DependencyIndexes: file_proto_MathService_proto_depIdxs,
-		MessageInfos:      file_proto_MathService_proto_msgTypes,
+		GoTypes:           file_MathService_proto_goTypes,
+		DependencyIndexes: file_MathService_proto_depIdxs,
+		MessageInfos:      file_MathService_proto_msgTypes,
 	}.Build()
-	File_proto_MathService_proto = out.File
-	file_proto_MathService_proto_goTypes = nil
-	file_proto_MathService_proto_depIdxs = nil
+	File_MathService_proto = out.File
+	file_MathService_proto_goTypes = nil
+	file_MathService_proto_depIdxs = nil
 }

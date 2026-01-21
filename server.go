@@ -9,8 +9,12 @@ import (
 	"gorpc/utils"
 	"log"
 	"net"
+	"net/http"
+	"sync"
 
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 // struct implementing unary rpcs
@@ -62,10 +66,44 @@ func main() {
 
 	log.Printf("listening on :%d", port)
 
-	// Serve
-	err = grpcServer.Serve(listner)
+	wg := sync.WaitGroup{}
+
+	// Serve grpc
+	go func() {
+		wg.Add(1)
+		err = grpcServer.Serve(listner)
+		if err != nil {
+			log.Fatal("Error on Serve", err)
+		}
+		wg.Done()
+	}()
+
+	// serve reverse-proxy http -> grpc
+	conn, err := grpc.NewClient("localhost:5051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatal("Error on Serve", err)
+		log.Fatal("Failed to create gateway grpc client", err)
+	}
+	mux := runtime.NewServeMux()
+	err = MathService.RegisterMathServiceHandler(context.Background(), mux, conn)
+
+	if err != nil {
+		log.Fatal("Failed to register gateway", err)
 	}
 
+	gwServer := &http.Server{
+		Addr:    ":8090",
+		Handler: mux,
+	}
+
+	go func() {
+		wg.Add(1)
+		log.Printf("gateway listening on :%d", port)
+		err = gwServer.ListenAndServe()
+		if err != nil {
+			log.Fatal("Error starting gateway server")
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
 }
