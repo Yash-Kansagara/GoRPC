@@ -14,6 +14,13 @@ import (
 
 func Add(ctx context.Context, req *MathService.AddRequest) (*MathService.AddResponse, error) {
 
+	// test headers
+	/*
+		md, exist := metadata.FromIncomingContext(ctx)
+		if exist {
+			fmt.Println(md.Get("custom-header"))
+		}
+	*/
 	ans := make([]byte, (int)(math.Max(float64(len(req.Op1)), float64(len(req.Op2)))+1))
 	for i := range ans {
 		ans[i] = 'x'
