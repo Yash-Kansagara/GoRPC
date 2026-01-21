@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ServerStreamService;
+
+option go_package = "/gen/ServerStream;ServerStream";
+
+message Req {
+    int32 count = 1;
+    int32 seed = 2;
+}
+
+message Res {
+    int32 random = 1;
+}
+
+service RandomStream {
+    rpc StreamRandoms (Req) returns (stream Res);
+}
